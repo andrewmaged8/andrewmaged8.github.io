@@ -3,6 +3,19 @@ var btn = document.getElementById("heartTxt");
 btn.style.opacity = 0;
 var btnVal = 0;
 
+
+// Preload images for smoother transitions
+function preloadImages() {
+	for (var i = 0; i < imageArray.length; i++) {
+		var img = new Image();
+		img.src = imageArray[i];
+	}
+}
+
+window.onload = function() {
+	preloadImages();
+};
+
 function showImage() {
     // Set the image source and text for the current index
     myImage.setAttribute("src", imageArray[imageIndex]);
