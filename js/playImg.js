@@ -31,7 +31,7 @@ function showImage() {
             }
             // Call the showImage function again to display the next image and text
             showImage();
-        }, 4500); // Adjust this delay as needed
+        }, 2500); // Adjust this delay as needed
     };
 }
 
