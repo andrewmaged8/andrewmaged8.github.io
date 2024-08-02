@@ -3,33 +3,43 @@ var btn = document.getElementById("heartTxt");
 btn.style.opacity = 0;
 var btnVal = 0;
 
-function showImage(){
-	//document.getElementById("imgTxt").style.opacity = 0;
-	myImage.setAttribute("src", imageArray[imageIndex]);
-	myTxt.innerHTML = txtArray[imageIndex];
-	//document.getElementById("imgTxt").style.opacity = 1 - flag;
-	imageIndex++;
-	if(imageIndex >= len){
-		imageIndex = 0;
-	}
+function showImage() {
+    // Set the image source and text for the current index
+    myImage.setAttribute("src", imageArray[imageIndex]);
+    myTxt.innerHTML = txtArray[imageIndex];
+    
+    // Wait for the image to load before proceeding to the next image and text
+    myImage.onload = function() {
+        setTimeout(function() {
+            // Increment the image index
+            imageIndex++;
+            if (imageIndex >= len) {
+                imageIndex = 0;
+            }
+            // Call the showImage function again to display the next image and text
+            showImage();
+        }, 2500); // Adjust this delay as needed
+    };
 }
 
-function play(){
-	if(t == 0){
-		myImage.setAttribute("src", "");
-		myTxt.innerHTML = "";
-		imageIndex = 0;
-		clearInterval(showImageInterval);
-	}
-	flag = 1 - flag;
-	document.getElementById("typeDiv").style.opacity = flag;
-	document.getElementById("imgTxt").style.opacity = 1 - flag;
-	if(t == 0){
-		setTimeout(showImage, 1000);
-		setInterval(showImage, 2500);
-	}
-	t++;
+
+function play() {
+    if (t == 0) {
+        myImage.setAttribute("src", "");
+        myTxt.innerHTML = "";
+        imageIndex = 0;
+        clearInterval(showImageInterval);
+        clearInterval(imgInterval);
+    }
+    flag = 1 - flag;
+    document.getElementById("typeDiv").style.opacity = flag;
+    document.getElementById("imgTxt").style.opacity = 1 - flag;
+    if (t == 0) {
+        setTimeout(showImage, 1000);
+    }
+    t++;
 }
+
 
 function preshowImage(){
 	document.getElementById("imgTxt").style.opacity = 0;
